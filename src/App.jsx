@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
 import { getProperties } from "./Api.jsx";
 
 import './App.css';
@@ -18,7 +18,7 @@ function App() {
       setIsLoading(false);
     } catch (err){
       setHasErrored(err);
-      setIsLoading(false);``
+      setIsLoading(false);
     };
   };
 
@@ -31,7 +31,9 @@ useEffect(() => {
 if (isLoading) {
     return <p>Loading...</p>
   }
-
+if (hasErrored) {
+  return <p>Error: {hasErrored.message}</p>;
+}
 
 return (
   <>
@@ -46,10 +48,6 @@ return (
     </Routes>
 
   </div>
-
-  <div className="App">
-    <Navbar/>
-    </div>
   </>
 );
 }
