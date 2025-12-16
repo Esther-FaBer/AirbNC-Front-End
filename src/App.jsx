@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getProperties } from "./Api.jsx";
 
+
 import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
+import Header from "./Components/Header.jsx";
 
 function App() {
   const [properties, setProperties] = useState([]); // hold properties fetched from api
@@ -38,6 +40,7 @@ if (hasErrored) {
 return (
   <>
   <div className="App">
+    <Header />
 
     <header className="Title">
       <h1>Properties</h1>

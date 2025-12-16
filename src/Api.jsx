@@ -1,4 +1,5 @@
 import axios from "axios";
+import Header from './Components/Header.jsx';
 
 //Properties API
   export const getProperties = async () => {
