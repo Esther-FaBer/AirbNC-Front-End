@@ -1,5 +1,5 @@
 import axios from "axios";
-import Header from './Components/Header.jsx';
+//import Header from './Components/Header.jsx';
 
 //Properties API
   export const getProperties = async () => {
@@ -16,8 +16,8 @@ import Header from './Components/Header.jsx';
     return propertiesData;
   };
   
-  //PropertybyID API
-  export const getPropertyById = async () => {
+  //PropertybyId API
+  export const getPropertyById = async (id) => {
     const { data } = await axios.get(`http://localhost:5174/api/properties/${id}`);//check
     return data;
   }

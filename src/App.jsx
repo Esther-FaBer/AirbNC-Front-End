@@ -5,7 +5,7 @@ import { getProperties } from "./Api.jsx";
 
 import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
-import Header from "./Components/Header.jsx";
+//import Header from "./Components/Header.jsx";
 
 function App() {
   const [properties, setProperties] = useState([]); // hold properties fetched from api
