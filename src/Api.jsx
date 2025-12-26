@@ -5,7 +5,7 @@ import axios from "axios";
   export const getProperties = async () => {
     const { 
         data: { results },
-    } = await axios.get(""); //check
+    } = await axios.get("http://localhost:5174/api/properties");
 
     const propertiesData = await Promise.all(
       results.map(async ({ url }) => {
@@ -18,12 +18,14 @@ import axios from "axios";
   
   //PropertybyId API
   export const getPropertyById = async (id) => {
-    const { data } = await axios.get(`http://localhost:5174/api/properties/${id}`);//check
+    const { data } = await axios.get(`http://localhost:5174/api/properties/${id}`);
     return data;
   }
 
   //Reviews (by prop id) API
   export const getReviewsByProperty = async (id) => {
-    const { data } = await axios.get(`http://localhost:5174/api/properties/${id}/reviews`);//check
+    const { data } = await axios.get(`http://localhost:5174/api/properties/${id}/reviews`);
     return data;
   }
+
+  
