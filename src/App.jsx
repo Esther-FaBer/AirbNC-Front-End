@@ -5,10 +5,10 @@ import { getProperties } from "./Api.jsx";
 
 import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
-//import Header from "./Components/Header.jsx";
+import Header from "./Components/Header.jsx";
 
 function App() {
-  const [properties, setProperties] = useState([]); // hold properties fetched from api
+  const[properties, setProperties] = useState([]); // hold properties fetched from api
   const[isLoading, setIsLoading] = useState(true); // checks if loading.. should show
   const[hasErrored, setHasErrored] = useState(null); // stores an error if request fails
   
