@@ -16,8 +16,8 @@ export default function PropertiesGrid({ properties }) {
                     </div>
                     <div className={styles.content}>
                         <h3 className={styles.title}>{property.name}</h3>
-                        <p className={styles.location}>{property.location}</p>
-                        <p className={styles.price}>${property.price}/night</p>
+                        <p className={styles.location}>{property.location.city}</p>
+                        <p className={styles.price}>${property.price_per_night}/night</p>
                         <Link to={`/Property/${property.id}`} className={styles.link}>
                             <button className={styles.button}>View Details</button>
                         </Link>

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getProperties } from "./Api.jsx";
-
-
 import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
 import Header from "./Components/Header.jsx";
@@ -14,16 +12,16 @@ function App() {
   
   //fecth Properties from api
   const fetchProperties = async () => {
-    try{
+    try {
       const properties = await getProperties();
       setProperties(properties);
-      setIsLoading(false);
     } catch (err){
       setHasErrored(err);
+    } finally {
       setIsLoading(false);
     };
   };
-
+console.log(properties[0])
 
 //fetched the properties data as soon as the app starts
 useEffect(() => {
