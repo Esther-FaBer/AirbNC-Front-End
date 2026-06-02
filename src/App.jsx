@@ -10,7 +10,7 @@ function App() {
   const[isLoading, setIsLoading] = useState(true); // checks if loading.. should show
   const[hasErrored, setHasErrored] = useState(null); // stores an error if request fails
   
-  //fecth Properties from api
+  //fecth Properties from API
   const fetchProperties = async () => {
     try {
       const properties = await getProperties();
