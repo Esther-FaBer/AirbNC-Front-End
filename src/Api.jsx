@@ -16,7 +16,7 @@ const BASE_URL = "http://localhost:9090";
 
   //Reviews (by prop id) API
   export const getReviewsByProperty = async (id) => {
-    const { data } = await axios.get(`http://localhost:9090/api/properties/${id}/reviews`);
+    const { data } = await axios.get(`${BASE_URL}/api/properties/${id}/reviews`);
     return data;
   }
 

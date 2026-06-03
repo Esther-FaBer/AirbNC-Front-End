@@ -10,7 +10,7 @@ export default function PropertiesGrid({ properties }) {
                     <div className={styles.imageContainer}>
                         <img 
                             src={property.image || "/placeholder.jpg"} 
-                            alt={property.name}
+                            alt={property.property_name}
                             className={styles.image}
                         />
                     </div>
@@ -18,7 +18,7 @@ export default function PropertiesGrid({ properties }) {
                         <h3 className={styles.title}>{property.name}</h3>
                         <p className={styles.location}>{property.location.city}</p>
                         <p className={styles.price}>${property.price_per_night}/night</p>
-                        <Link to={`/Property/${property.id}`} className={styles.link}>
+                        <Link to={`/Property/${property.property_id}`} className={styles.link}>
                             <button className={styles.button}>View Details</button>
                         </Link>
                     </div>
