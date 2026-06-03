@@ -1,23 +1,16 @@
 import axios from "axios";
 
-//Properties API
-  export const getProperties = async () => {
-    const { data } = await axios.get("http://localhost:9090/api/properties");
-    console.log(data);
-    const { results } = data;
+const BASE_URL = "http://localhost:9090";
 
-    const propertiesData = await Promise.all(
-      results.map(async ({ url }) => {
-        const { data } = await axios.get(url);
-        return data;
-    })
-  );
-    return propertiesData;
-  };
+//Properties API
+ export const getProperties = async () => {
+  const { data: { properties } } = await axios.get(`${BASE_URL}/api/properties`);
+  return properties;
+};
   
   //PropertybyId API
   export const getPropertyById = async (id) => {
-    const { data } = await axios.get(`http://localhost:9090/api/properties/${id}`);
+    const { data } = await axios.get(`${BASE_URL}/api/properties/${id}`);
     return data;
   }
 
