@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { getProperties } from "./Api.jsx";
+import { getProperties } from "./Api.js";
 import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
 import Header from "./Components/Header.jsx";
