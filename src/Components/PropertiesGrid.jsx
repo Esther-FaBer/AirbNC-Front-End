@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import styles from "./PropertiesGrid.module.css";
 
 export default function PropertiesGrid({ properties }) {
+    console.log("first property:", properties[0]);
     return (
         <div className={styles.grid}>
             {properties.map((property) => (
                 <div key={property.property_id} className={styles.card}>
                     <div className={styles.imageContainer}>
                         <img 
-                            src={property.image || "/placeholder.jpg"} 
-                            alt={property.property_name}
+                            src={property.image_url || "/placeholder.jpg"} 
+                            alt={property.alt_tag}
                             className={styles.image}
                         />
                     </div>
