@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
     <header className="header">
-      <div className="logo">AirbNC logo</div>
+      <div className="logo">AirbNC</div>
       <div className="search-bar">
         <div className="input-group">
           <label htmlFor="check-in">Check-in</label>

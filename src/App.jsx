@@ -4,11 +4,18 @@ import { getProperties } from "./Api.js";
 import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
 import Header from "./Components/Header.jsx";
+import FilterBar from "./Components/FilterBar.jsx";
 
 function App() {
   const[properties, setProperties] = useState([]); // hold properties fetched from api
   const[isLoading, setIsLoading] = useState(true); // checks if loading.. should show
   const[hasErrored, setHasErrored] = useState(null); // stores an error if request fails
+  const [filters, setFilters] = useState({
+    search: "",
+    minPrice: "",
+    maxPrice: "",
+    sortBy: "default"
+  });
   
   //fecth Properties from API
   const fetchProperties = async () => {
