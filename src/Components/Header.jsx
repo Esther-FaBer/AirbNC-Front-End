@@ -1,46 +1,61 @@
 import React, { useState } from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ searchValue, onSearchChange }) => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [guests, setGuests] = useState(1);
 
     return (
-    <header className="header">
-      <div className="logo">AirbNC</div>
-      <div className="search-bar">
-        <div className="input-group">
-          <label htmlFor="check-in">Check-in</label>
-          <input
-            type="date"
-            id="check-in"
-            value={checkIn}
-            onChange={(e) => setCheckIn(e.target.value)}
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="check-out">Check-out</label>
-          <input
-            type="date"
-            id="check-out"
-            value={checkOut}
-            onChange={(e) => setCheckOut(e.target.value)}
-          />
-        </div>
-    <div className="input-group">
+      <header className="header">
+        <div className="logo">AirbNC</div>
+        <div className="search-bar">
+
+            <div className="input-group">
+            <label htmlFor="search">Location or property</label>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search..."
+              value={searchValue}
+              onChange={(e) => onSearchChange(e.target.value)}
+            />
+            </div>
+
+            <div className="input-group">
+            <label htmlFor="check-in">Check-in</label>
+            <input
+              type="date"
+              id="check-in"
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+            />
+            </div>
+
+            <div className="input-group">
+            <label htmlFor="check-out">Check-out</label>
+            <input
+              type="date"
+              id="check-out"
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
+            />
+          </div>
+
+          <div className="input-group">
           <label htmlFor="guests">Guests</label>
           <input
-            type="number"
-            id="guests"
-            min="1"
-            value={guests}
-            onChange={(e) => setGuests(e.target.value)}
-          />
+              type="number"
+              id="guests"
+              min="1"
+              value={guests}
+              onChange={(e) => setGuests(e.target.value)}
+            />
+          </div>
+
+          <button className="search-button">Search</button>
         </div>
-        <button className="search-button">Search</button>
-      </div>
-    </header>
+      </header>
   );
 };
 
