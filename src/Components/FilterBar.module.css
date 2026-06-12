@@ -37,3 +37,37 @@ label {
   transition: border-color 0.15s;
   min-width: 130px;
 }
+
+.input:focus,
+.select:focus {
+  border-color: #FF5A5F;
+}
+
+.input::placeholder {
+  color: #b0b0b0;
+}
+
+.resetBtn {
+  height: 40px;
+  padding: 0 16px;
+  border: 1.5px solid #222222;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #222222;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  align-self: flex-end;
+}
+
+.resetBtn:hover {
+  background: #222222;
+  color: #ffffff;
+}
+
+.resultsCount {
+  font-size: 0.875rem;
+  color: #717171;
+  white-space: nowrap;
+}
