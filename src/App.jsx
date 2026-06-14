@@ -5,6 +5,7 @@ import './App.css';
 import PropertiesGrid from "./Components/PropertiesGrid.jsx";
 import Header from "./Components/Header.jsx";
 import FilterBar from "./Components/FilterBar.jsx";
+import PropertyDetail from "./Components/PropertyDetail.jsx";
 
 function App() {
   const[properties, setProperties] = useState([]); // hold properties fetched from api
