@@ -9,7 +9,6 @@ import PropertyDetail from "./Components/PropertyDetail.jsx";
 
 function App() {
   const[properties, setProperties] = useState([]); // hold properties fetched from api
-  const [filteredProperties, setFilteredProperties] = useState([]);
   const[isLoading, setIsLoading] = useState(true); // checks if loading.. should show
   const[hasErrored, setHasErrored] = useState(null); // stores an error if request fails
   const [filters, setFilters] = useState({
@@ -30,7 +29,6 @@ function App() {
       setIsLoading(false);
     };
   };
-console.log(properties[0])
 
 //fetched the properties data as soon as the app starts
 useEffect(() => {
@@ -55,6 +53,7 @@ return (
 
     <Routes>
       <Route path="/" element = {<PropertiesGrid properties={properties}/>} />
+      <Route path="/property/:id" element={<PropertyDetail />} />
     </Routes>
 
   </div>

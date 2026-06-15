@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./PropertiesGrid.module.css";
 
 export default function PropertiesGrid({ properties }) {
-    console.log("first property:", properties[0]);
     return (
         <div className={styles.grid}>
             {properties.map((property) => (
