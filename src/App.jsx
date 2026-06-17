@@ -18,22 +18,67 @@ function App() {
     sortBy: "default"
   });
   
-  //fecth Properties from API
-  const fetchProperties = async () => {
+  //fecth properties
+const fetchProperties = async () => {
     try {
-      const properties = await getProperties();
-      setProperties(properties);
-    } catch (err){
+      const data = await getProperties();
+      setProperties(data);
+      setFilteredProperties(data);
+    } catch (err) {
       setHasErrored(err);
     } finally {
       setIsLoading(false);
-    };
+    }
   };
 
 //fetched the properties data as soon as the app starts
 useEffect(() => {
   fetchProperties()
 }, []);
+
+ //re-run filters whenever properties change
+  useEffect(() => {
+    let result = [...properties];
+
+    if (filters.search.trim()) {
+      const query = filters.search.toLowerCase();
+      result = result.filter((p) =>
+        p.property_name.toLowerCase().includes(query) ||
+        p.location.toLowerCase().includes(query)
+      );
+    }
+
+    if (filters.minPrice !== "") {
+      result = result.filter(
+        (p) => Number(p.price_per_night) >= Number(filters.minPrice)
+      );
+    }
+
+    if (filters.maxPrice !== "") {
+      result = result.filter(
+        (p) => Number(p.price_per_night) <= Number(filters.maxPrice)
+      );
+    }
+
+    if (filters.sortBy === "price_asc") {
+      result.sort((a, b) => Number(a.price_per_night) - Number(b.price_per_night));
+    } else if (filters.sortBy === "price_desc") {
+      result.sort((a, b) => Number(b.price_per_night) - Number(a.price_per_night));
+    } else if (filters.sortBy === "rating_desc") {
+      result.sort((a, b) => Number(b.avg_rating) - Number(a.avg_rating));
+    }
+
+    setFilteredProperties(result);
+  }, [filters, properties]);
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleReset = () => {
+    setFilters({ search: "", minPrice: "", maxPrice: "", sortBy: "default" });
+  };
+
 
 if (isLoading) {
     return <p>Loading...</p>
@@ -47,9 +92,8 @@ return (
   <div className="App">
     <Header />
 
-    <header className="Title">
-      <h1>Properties</h1>
-    </header>
+    <header searchValue={filters.search}
+        onSearchChange={(value) => handleFilterChange("search", value)}/>
 
     <Routes>
       <Route path="/" element = {<PropertiesGrid properties={properties}/>} />
