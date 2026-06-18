@@ -8,18 +8,19 @@ import FilterBar from "./Components/FilterBar.jsx";
 import PropertyDetail from "./Components/PropertyDetail.jsx";
 
 function App() {
-  const[properties, setProperties] = useState([]); // hold properties fetched from api
-  const[isLoading, setIsLoading] = useState(true); // checks if loading.. should show
-  const[hasErrored, setHasErrored] = useState(null); // stores an error if request fails
+  const [properties, setProperties] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasErrored, setHasErrored] = useState(null);
   const [filters, setFilters] = useState({
     search: "",
     minPrice: "",
     maxPrice: "",
     sortBy: "default"
   });
-  
-  //fecth properties
-const fetchProperties = async () => {
+
+  // Fetch properties once on mount
+  const fetchProperties = async () => {
     try {
       const data = await getProperties();
       setProperties(data);
@@ -31,12 +32,11 @@ const fetchProperties = async () => {
     }
   };
 
-//fetched the properties data as soon as the app starts
-useEffect(() => {
-  fetchProperties()
-}, []);
+  useEffect(() => {
+    fetchProperties();
+  }, []);
 
- //re-run filters whenever properties change
+  // Re-run filters whenever filters or properties change
   useEffect(() => {
     let result = [...properties];
 
@@ -79,30 +79,38 @@ useEffect(() => {
     setFilters({ search: "", minPrice: "", maxPrice: "", sortBy: "default" });
   };
 
-
-if (isLoading) {
-    return <p>Loading...</p>
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
-if (hasErrored) {
-  return <p>Error: {hasErrored.message}</p>;
-}
+  if (hasErrored) {
+    return <p>Error: {hasErrored.message}</p>;
+  }
 
-return (
-  <>
-  <div className="App">
-    <Header />
-
-    <header searchValue={filters.search}
-        onSearchChange={(value) => handleFilterChange("search", value)}/>
-
-    <Routes>
-      <Route path="/" element = {<PropertiesGrid properties={properties}/>} />
-      <Route path="/property/:id" element={<PropertyDetail />} />
-    </Routes>
-
-  </div>
-  </>
-);
+  return (
+    <div className="App">
+      <Header
+        searchValue={filters.search}
+        onSearchChange={(value) => handleFilterChange("search", value)}
+      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <FilterBar
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onReset={handleReset}
+                totalResults={filteredProperties.length}
+              />
+              <PropertiesGrid properties={filteredProperties} />
+            </>
+          }
+        />
+        <Route path="/property/:id" element={<PropertyDetail />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

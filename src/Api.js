@@ -30,10 +30,14 @@ export const getProperties = async () => {
   };
 
  
-  export const getReviewsByProperty = async (id) => {
+export const getReviewsByProperty = async (id) => {
+  try {
     const { data } = await axios.get(`${BASE_URL}/api/properties/${id}/reviews`);
     return data;
-  };
+  } catch {
+    return { reviews: [] };
+  }
+};
 
   export const getImagesByProperty = async (id) => {
   const { data } = await axios.get(`${BASE_URL}/api/properties/${id}/images`);

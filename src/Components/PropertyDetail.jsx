@@ -51,8 +51,8 @@ export default function PropertyDetail() {
     <div className="property-detail">
       <Link to="/" className="back-link">← Back to properties</Link>
 
-      <h1>{property.property_name}</h1>
-      <p className="property-detail-location">{property.location}</p>
+      <h1>{property.name}</h1>
+      <p className="property-detail-host">Hosted by {property.host_name}</p>
 
       {images.length > 0 && (
         <div className="property-detail-images">
