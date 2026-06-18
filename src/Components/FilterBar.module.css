@@ -1,54 +1,78 @@
+/* ── Filter bar shell ── */
 .filterBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 40px;
+  padding: 14px 40px;
   background: #ffffff;
   border-bottom: 1px solid #EBEBEB;
   flex-wrap: wrap;
   gap: 12px;
+  position: sticky;
+  top: 72px; /* sits just below the header */
+  z-index: 90;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+/* ── Controls row ── */
 .filterControls {
   display: flex;
   align-items: flex-end;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-label {
-  font-size: 0.7rem;
+/* ── Individual filter group ── */
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   color: #222222;
 }
 
+/* ── Inputs & select ── */
 .input,
 .select {
-  height: 40px;
+  height: 38px;
   padding: 0 12px;
-  border: 1px solid #EBEBEB;
+  border: 1.5px solid #EBEBEB;
   border-radius: 8px;
   font-size: 0.875rem;
   color: #222222;
-  background: #ffffff;
+  background: #fafafa;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   min-width: 130px;
+  cursor: pointer;
+}
+
+.input:hover,
+.select:hover {
+  border-color: #cccccc;
+  background: #ffffff;
 }
 
 .input:focus,
 .select:focus {
   border-color: #FF5A5F;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.1);
 }
 
 .input::placeholder {
-  color: #b0b0b0;
+  color: #c0c0c0;
 }
 
+/* ── Reset button ── */
 .resetBtn {
-  height: 40px;
+  height: 38px;
   padding: 0 16px;
   border: 1.5px solid #222222;
   border-radius: 8px;
@@ -57,8 +81,9 @@ label {
   color: #222222;
   background: transparent;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   align-self: flex-end;
+  white-space: nowrap;
 }
 
 .resetBtn:hover {
@@ -66,8 +91,33 @@ label {
   color: #ffffff;
 }
 
+.resetBtn:active {
+  background: #000000;
+  border-color: #000000;
+}
+
+/* ── Results count ── */
 .resultsCount {
   font-size: 0.875rem;
   color: #717171;
   white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .filterBar {
+    padding: 12px 20px;
+    top: 60px;
+  }
+
+  .filterControls {
+    gap: 8px;
+  }
+
+  .input,
+  .select {
+    min-width: 110px;
+    font-size: 0.8rem;
+  }
 }

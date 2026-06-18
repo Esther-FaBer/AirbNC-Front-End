@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getPropertyById, getReviewsByProperty, getImagesByProperty } from "../Api.js";
+import "./PropertyDetail.css";
 
 export default function PropertyDetail() {
   const { id } = useParams();
