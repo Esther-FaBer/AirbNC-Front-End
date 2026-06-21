@@ -44,4 +44,11 @@ export const getReviewsByProperty = async (id) => {
   return data;
 };
 
+export const postReview = async (propertyId, guest_id, rating, comment) => {
+  const { data } = await axios.post(
+    `${BASE_URL}/api/properties/${propertyId}/reviews`,
+    { guest_id, rating, comment }
+  );
+  return data;
+};
   
