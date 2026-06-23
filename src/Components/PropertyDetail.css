@@ -141,3 +141,120 @@
   color: #b0b0b0;
   margin: 0;
 }
+
+/* ── Post review section ── */
+.post-review-section {
+  margin: 40px 0;
+  padding: 28px;
+  border: 1px solid #EBEBEB;
+  border-radius: 16px;
+  background: #fafafa;
+}
+
+.post-review-section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222222;
+  margin: 0 0 4px 0;
+}
+
+.posting-as {
+  font-size: 0.875rem;
+  color: #717171;
+  margin: 0 0 20px 0;
+}
+
+/* ── Form ── */
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #222222;
+}
+
+.form-select,
+.form-textarea {
+  padding: 10px 12px;
+  border: 1.5px solid #EBEBEB;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #222222;
+  background: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-select:focus,
+.form-textarea:focus {
+  border-color: #FF5A5F;
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ── Feedback messages ── */
+.form-error {
+  font-size: 0.875rem;
+  color: #e74c3c;
+  margin: 0;
+}
+
+.form-success {
+  font-size: 0.875rem;
+  color: #27ae60;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Submit button ── */
+.submit-btn {
+  align-self: flex-start;
+  padding: 12px 28px;
+  background: #FF5A5F;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #e04a4f;
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Review header ── */
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.review-rating {
+  font-size: 0.85rem;
+}
