@@ -21,7 +21,6 @@ export default function PropertyDetail() {
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-
   const fetchPropertyDetail = async () => {
     try {
       const [propertyData, reviewsData, imagesData] = await Promise.all([
@@ -29,10 +28,6 @@ export default function PropertyDetail() {
         getReviewsByProperty(id),
         getImagesByProperty(id),
       ]);
-
-      console.log("propertyData:", propertyData);
-      console.log("reviewsData:", reviewsData);
-      console.log("imagesData:", imagesData);
 
       setProperty(propertyData.property || propertyData);
       setReviews(reviewsData.reviews || reviewsData);
@@ -56,7 +51,6 @@ export default function PropertyDetail() {
 
     try {
       const { review } = await postReview(id, LOGGED_IN_USER.user_id, rating, comment);
-      // Add new review to the top of the list immediately
       setReviews((prev) => [
         {
           ...review,
@@ -64,7 +58,6 @@ export default function PropertyDetail() {
         },
         ...prev,
       ]);
-      // Reset form
       setComment("");
       setRating(5);
       setSubmitSuccess(true);
@@ -75,22 +68,21 @@ export default function PropertyDetail() {
     }
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-  if (hasErrored) {
-    return <p>Error: {hasErrored.message}</p>;
-  }
-  if (!property) {
-    return <p>Property not found.</p>;
-  }
+  if (isLoading) return <p>Loading...</p>;
+  if (hasErrored) return <p>Error: {hasErrored.message}</p>;
+  if (!property) return <p>Property not found.</p>;
 
   return (
     <div className="property-detail">
       <Link to="/" className="back-link">← Back to properties</Link>
 
       <h1>{property.name}</h1>
-      <p className="property-detail-host">Hosted by {property.host_name}</p>
+
+      <p className="property-detail-location">{property.location}</p>
+
+      {property.host_name && (
+        <p className="property-detail-host">Hosted by {property.host_name}</p>
+      )}
 
       {images.length > 0 && (
         <div className="property-detail-images">
@@ -108,10 +100,6 @@ export default function PropertyDetail() {
       <p className="property-detail-price">
         £<span>{property.price_per_night}</span>/night
       </p>
-
-      {property.host && (
-        <p className="property-detail-host">Hosted by {property.host}</p>
-      )}
 
       {property.description && (
         <p className="property-detail-description">{property.description}</p>
@@ -165,19 +153,20 @@ export default function PropertyDetail() {
         </form>
       </section>
 
-
       {/* ── Reviews list ── */}
       <section className="property-detail-reviews">
-        <h2>Reviews</h2>
+        <h2>Reviews {reviews.length > 0 && `(${reviews.length})`}</h2>
         {reviews.length === 0 ? (
-          <p>No reviews yet.</p>
+          <p>No reviews yet — be the first!</p>
         ) : (
           reviews.map((review) => (
             <div key={review.review_id} className="review-card">
-              <p className="review-author">{review.guest_name}</p>
-              {review.rating && (
-                <p className="review-rating">Rating: {review.rating}/5</p>
-              )}
+              <div className="review-header">
+                <p className="review-author">{review.guest}</p>
+                {review.rating && (
+                  <p className="review-rating">{"⭐".repeat(review.rating)}</p>
+                )}
+              </div>
               {review.comment && (
                 <p className="review-comment">{review.comment}</p>
               )}
@@ -190,10 +179,6 @@ export default function PropertyDetail() {
           ))
         )}
       </section>
-
-
-
-
     </div>
   );
 }
