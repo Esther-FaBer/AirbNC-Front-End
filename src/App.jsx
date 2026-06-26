@@ -79,9 +79,12 @@ function App() {
     setFilters({ search: "", minPrice: "", maxPrice: "", sortBy: "default" });
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  if (isLoading) return (
+  <>
+    <Header />
+    <SkeletonGrid />   // shows 6 placeholder cards
+  </>
+  );
   if (hasErrored) {
     return <p>Error: {hasErrored.message}</p>;
   }
