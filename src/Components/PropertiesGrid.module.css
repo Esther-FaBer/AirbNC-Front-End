@@ -94,3 +94,37 @@
 .button:hover {
   background-color: #e04a4f;
 }
+
+/* ── Tablet ── */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .imageContainer {
+    height: 180px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 12px;
+  }
+
+  .imageContainer {
+    height: 200px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .content {
+    padding: 12px;
+  }
+}
