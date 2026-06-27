@@ -258,3 +258,49 @@
 .review-rating {
   font-size: 0.85rem;
 }
+
+/* ── Tablet ── */
+@media (max-width: 768px) {
+  .property-detail {
+    padding: 24px 20px;
+  }
+
+  .property-detail h1 {
+    font-size: 1.6rem;
+  }
+
+  .property-detail-images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .post-review-section {
+    padding: 20px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .property-detail {
+    padding: 16px;
+  }
+
+  .property-detail h1 {
+    font-size: 1.4rem;
+  }
+
+  .property-detail-images {
+    grid-template-columns: 1fr;
+  }
+
+  .property-detail-image {
+    height: 200px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  .review-card {
+    padding: 14px;
+  }
+}
