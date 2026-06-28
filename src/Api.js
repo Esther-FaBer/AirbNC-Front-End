@@ -22,12 +22,10 @@ export const getProperties = async () => {
   return propertiesWithImages;
 };
   
-
-
-  export const getPropertyById = async (id) => {
-    const { data } = await axios.get(`${BASE_URL}/api/properties/${id}`);
-    return data;
-  };
+export const getPropertyById = async (id) => {
+  const { data } = await axios.get(`${BASE_URL}/api/properties/${id}`);
+  return data;
+};
 
  
 export const getReviewsByProperty = async (id) => {
@@ -39,7 +37,7 @@ export const getReviewsByProperty = async (id) => {
   }
 };
 
-  export const getImagesByProperty = async (id) => {
+export const getImagesByProperty = async (id) => {
   const { data } = await axios.get(`${BASE_URL}/api/properties/${id}/images`);
   return data;
 };
@@ -50,5 +48,9 @@ export const postReview = async (propertyId, guest_id, rating, comment) => {
     { guest_id, rating, comment }
   );
   return data;
+};
+
+export const deleteReview = async (reviewId) => {
+  await axios.delete(`${BASE_URL}/api/reviews/${reviewId}`);
 };
   

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getPropertyById, getReviewsByProperty, getImagesByProperty, postReview } from "../Api.js";
+import { getPropertyById, getReviewsByProperty, getImagesByProperty, postReview, deleteReview } from "../Api.js";
 import "./PropertyDetail.css";
 import SkeletonPropertyDetail from "./SkeletonPropertyDetail.jsx";
 
@@ -15,12 +15,16 @@ export default function PropertyDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasErrored, setHasErrored] = useState(null);
 
-  // Review form state
+  // Post review form state
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Delete state
+  const [deleteError, setDeleteError] = useState(null);
+
 
   const fetchPropertyDetail = async () => {
     try {
@@ -66,6 +70,19 @@ export default function PropertyDetail() {
       setSubmitError("Failed to post review. Please try again.");
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteReview = async (reviewId) => {
+    setDeleteError(null);
+    try {
+      await deleteReview(reviewId);
+      // Remove deleted review from state immediately
+      setReviews((prev) =>
+        prev.filter((review) => review.review_id !== reviewId)
+      );
+    } catch (err) {
+      setDeleteError("Failed to delete review. Please try again.");
     }
   };
 
@@ -157,6 +174,9 @@ export default function PropertyDetail() {
       {/* ── Reviews list ── */}
       <section className="property-detail-reviews">
         <h2>Reviews {reviews.length > 0 && `(${reviews.length})`}</h2>
+
+        {deleteError && <p className="form-error">{deleteError}</p>}
+
         {reviews.length === 0 ? (
           <p>No reviews yet — be the first!</p>
         ) : (
@@ -165,16 +185,31 @@ export default function PropertyDetail() {
               <div className="review-header">
                 <p className="review-author">{review.guest}</p>
                 {review.rating && (
-                  <p className="review-rating">{"⭐".repeat(review.rating)}</p>
+                  <p className="review-rating">
+                    {"⭐".repeat(review.rating)}
+                  </p>
                 )}
               </div>
+
               {review.comment && (
                 <p className="review-comment">{review.comment}</p>
               )}
+
               {review.created_at && (
                 <p className="review-date">
                   {new Date(review.created_at).toLocaleDateString("en-GB")}
                 </p>
+              )}
+
+
+              {/* Only show delete button on Jane Doe's reviews */}
+              {review.guest === LOGGED_IN_USER.name && (
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteReview(review.review_id)}
+                >
+                  Delete review
+                </button>
               )}
             </div>
           ))
