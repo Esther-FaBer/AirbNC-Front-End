@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getPropertyById, getReviewsByProperty, getImagesByProperty, postReview, deleteReview } from "../Api.js";
 import "./PropertyDetail.css";
 import SkeletonPropertyDetail from "./SkeletonPropertyDetail.jsx";
+import { useToast } from "../context/ToastContext.jsx";
 
 // Jane Doe is the logged in user — user_id: 1
 const LOGGED_IN_USER = { user_id: 1, name: "Jane Doe" };
